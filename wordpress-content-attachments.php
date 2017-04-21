@@ -10,6 +10,7 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: content-attachments
  * Domain Path: /languages
+ * GitHub Plugin URI: https://github.com/themecraftstudio/wordpress-content-attachments
 
  Content Attachments is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
