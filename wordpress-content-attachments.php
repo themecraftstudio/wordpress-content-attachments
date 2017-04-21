@@ -3,7 +3,7 @@
  * Plugin Name: Content Attachments
  * Plugin URI:  https://wordpress.org/plugins/content-attachments/
  * Description: TODO
- * Version:     0.0.1
+ * Version:     0.0.2
  * Author:      Themecraft Studio
  * Author URI:  https://themecraft.studio/
  * License:     GPL2
