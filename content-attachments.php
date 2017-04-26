@@ -42,8 +42,9 @@ HTML
 add_filter('media_send_to_editor', function ($html, $send_id, $attachment) {
 	$id = $attachment['id'];
 
-	// Skip image, video and audio attachments
-	if (wp_attachment_is('image', $id) || wp_attachment_is('video', $id) || wp_attachment_is('audio', $id))
+	// Skip image and video|audio attachments with embedded player
+	if (wp_attachment_is('image', $id) ||
+	        ((wp_attachment_is('video') || wp_attachment_is('audio')) && $html[0] === '['))
 		return $html;
 
 	$mimeType = get_post_mime_type($id);
