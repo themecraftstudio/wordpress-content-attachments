@@ -88,9 +88,6 @@ add_filter( 'the_content', function ($contentHtml) {
 		foreach ( $anchors as $anchor ) {
 			/** @var $anchor DOMElement */
 
-			$prev = $anchor->previousSibling;
-			$next = $anchor->nextSibling;
-
 			// Skip attachment prefixed or followed by text
 			if (($anchor->previousSibling && $anchor->previousSibling->nodeType == XML_TEXT_NODE) ||
 				($anchor->nextSibling && $anchor->nextSibling->nodeType == XML_TEXT_NODE))
@@ -103,8 +100,8 @@ add_filter( 'the_content', function ($contentHtml) {
 					if ($child_node->nodeType == XML_TEXT_NODE)
 						$text = $child_node->nodeValue;
 
-				$mimeType = $anchor->getAttribute('type'); // empty string of attribute is not found
-				$url = $anchor->getAttribute('href'); // empty string of attribute is not found
+				$mimeType = $anchor->getAttribute('type'); // empty string if attribute is not found
+				$url = $anchor->getAttribute('href'); // empty string if attribute is not found
 
 				// Parse HTML template
 				$templateHtml = CA_TEMPLATE;
@@ -134,3 +131,41 @@ add_filter( 'the_content', function ($contentHtml) {
 
 	return $contentHtml;
 });
+
+class ContentAttachments
+{
+	/**
+	 * Returns attachment ids for each attachment linking to its media file.
+	 *
+	 * @param string|WP_Post|int $contentHtml
+	 * @return array of post ids
+	 */
+	public static function getContentAttachments($contentHtml)
+	{
+		if (is_integer($contentHtml))
+			$contentHtml = get_post($contentHtml);
+		if ($contentHtml instanceof WP_Post)
+			$contentHtml = $contentHtml->post_content;
+
+		$content = new FragmentDOMDocument();
+		$content->loadHTML($contentHtml);
+
+		$query = new DOMXPath($content);
+		$anchors = $query->query('//a[contains(concat(" ", @class, " "), " content-attachment ")]');
+
+		$attachments = [];
+		foreach ($anchors as $anchor) {
+			/** @var DOMElement $anchor */
+			$url = $anchor->getAttribute('href');
+			//$type = $anchor->getAttribute('type'); // empty string if attribute is not found
+
+			// evaluates to 0 when the anchor does not link to the media file directly (e.g. attachment page)
+			$id = attachment_url_to_postid(urldecode($url));
+
+			if ($id)
+				$attachments[] = $id;
+		}
+
+		return $attachments;
+	}
+}
