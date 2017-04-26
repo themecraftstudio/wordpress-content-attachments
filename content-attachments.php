@@ -28,19 +28,25 @@
 
 require_once __DIR__ .'/includes/fragment-dom-document.class.php';
 
-// IMPORTANT: the template gets wrapped with a <div> element
+// TODO move to admin settings
 define('CA_TEMPLATE', <<<HTML
-	<!--<span>BEFORE</span>-->
+	<!-- START filtered content attachment -->
 	<a class="{{class}}" type="{{mime-type}}" href="{{url}}">
 		<span class="content-attachment-text">{{text}}</span>
 		<span><i class="content-attachment-icon"></i></span>
 	</a>
-	<!--<span>AFTER</span>-->
+	<!-- END filtered content attachment -->
 HTML
 );
 
 add_filter('media_send_to_editor', function ($html, $send_id, $attachment) {
-	$mimeType = get_post_mime_type($attachment['id']);
+	$id = $attachment['id'];
+
+	// Skip image, video and audio attachments
+	if (wp_attachment_is('image', $id) || wp_attachment_is('video', $id) || wp_attachment_is('audio', $id))
+		return $html;
+
+	$mimeType = get_post_mime_type($id);
 
 	if (extension_loaded('dom')) {
 		$doc = new FragmentDOMDocument();
