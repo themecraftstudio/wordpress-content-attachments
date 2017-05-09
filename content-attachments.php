@@ -104,7 +104,7 @@ add_filter( 'the_content', function ($contentHtml) {
 				$url = $anchor->getAttribute('href'); // empty string if attribute is not found
 
 				// Parse HTML template
-				$templateHtml = CA_TEMPLATE;
+				$templateHtml = apply_filters('content-attachments_template', CA_TEMPLATE);
 				$templateHtml = str_replace('{{class}}', $anchor->getAttribute('class'), $templateHtml);
 				$templateHtml = str_replace('{{mime-type}}', $mimeType, $templateHtml);
 				$templateHtml = str_replace('{{url}}', $url, $templateHtml);

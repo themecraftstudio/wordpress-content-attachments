@@ -11,6 +11,14 @@ Wrap non-image post attachments in handy tags that allow easy styling with CSS.
 == Description ==
 Wraps post attachments that are not images in handy tags that allow easy styling with CSS. It also adds a class to the attachment containing the mime type.
 
+Use add_filter('content-attachments_template', $html) to customized the HTML markup to render the attachment. Defaults to
+```
+<a class="{{class}}" type="{{mime-type}}" href="{{url}}">
+	<span class="content-attachment-text">{{text}}</span>
+	<span><i class="content-attachment-icon"></i></span>
+</a>
+```
+
 Main development repository at https://github.com/themecraftstudio/wordpress-content-attachments
 
 == Installation ==
