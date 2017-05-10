@@ -75,8 +75,12 @@ add_filter('media_send_to_editor', function ($html, $send_id, $attachment) {
 
 /**
  * Customize DOM for post attachments
+ *
+ * @param $contentHtml
+ *
+ * @return string
  */
-add_filter( 'the_content', function ($contentHtml) {
+function content_attachments_filter_content($contentHtml) {
 //	$post = get_post();
 
 	if (extension_loaded('dom') && !(empty($contentHtml))) {
@@ -90,7 +94,7 @@ add_filter( 'the_content', function ($contentHtml) {
 
 			// Skip attachment prefixed or followed by text
 			if (($anchor->previousSibling && $anchor->previousSibling->nodeType == XML_TEXT_NODE) ||
-				($anchor->nextSibling && $anchor->nextSibling->nodeType == XML_TEXT_NODE))
+			    ($anchor->nextSibling && $anchor->nextSibling->nodeType == XML_TEXT_NODE))
 				continue;
 
 			try {
@@ -130,7 +134,9 @@ add_filter( 'the_content', function ($contentHtml) {
 	}
 
 	return $contentHtml;
-});
+}
+add_filter( 'the_content', 'content_attachments_filter_content' );
+add_filter( 'acf_the_content', 'content_attachments_filter_content' );
 
 class ContentAttachments
 {
