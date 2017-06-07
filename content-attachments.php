@@ -3,7 +3,7 @@
  * Plugin Name: Content Attachments
  * Plugin URI:  https://wordpress.org/plugins/content-attachments/
  * Description: Wrap non-image post attachments in handy tags that allow easy styling with CSS.
- * Version:     0.1.0
+ * Version:     0.2.0
  * Author:      Themecraft Studio
  * Author URI:  https://themecraft.studio/
  * License:     GPL2
@@ -137,7 +137,7 @@ function content_attachments_filter_content($contentHtml) {
 
 	return $contentHtml;
 }
-add_filter( 'the_content', 'content_attachments_filter_content' );
+add_filter( 'the_content', 'content_attachments_filter_content', 9 );
 add_filter( 'acf_the_content', 'content_attachments_filter_content' );
 
 class ContentAttachments
