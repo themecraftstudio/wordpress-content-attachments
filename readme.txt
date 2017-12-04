@@ -19,6 +19,9 @@ Use add_filter('content-attachments_template', $html) to customized the HTML mar
 </a>
 ```
 
+For this plugin to work properly, "wpautop" (i.e. automatic wrapping in <p> tags of lines written in WYSIWYG editors) must be enabled on WYSIWYG content editors of both WordPress and ACF.
+This is the default behavior.
+
 Main development repository at https://github.com/themecraftstudio/wordpress-content-attachments
 
 == Installation ==

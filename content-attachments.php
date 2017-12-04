@@ -95,7 +95,10 @@ function content_attachments_filter_content($contentHtml) {
 	foreach ( $anchors as $anchor ) {
 		/** @var $anchor DOMElement */
 
-		// Skip attachment prefixed or followed by text
+		/*
+		 * Skip attachment prefixed or followed by a TEXT node.
+		 * This works as long as wpautop is executed before this hook on the content.
+		 */
 		if (($anchor->previousSibling && $anchor->previousSibling->nodeType == XML_TEXT_NODE) ||
 		    ($anchor->nextSibling && $anchor->nextSibling->nodeType == XML_TEXT_NODE))
 			continue;
