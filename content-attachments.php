@@ -138,7 +138,7 @@ function content_attachments_filter_content($contentHtml) {
 	return $contentHtml;
 }
 add_filter( 'the_content', 'content_attachments_filter_content', 10 );
-add_filter( 'acf_the_content', 'content_attachments_filter_content' );
+add_filter( 'acf_the_content', 'content_attachments_filter_content', 11 );
 
 class ContentAttachments
 {
