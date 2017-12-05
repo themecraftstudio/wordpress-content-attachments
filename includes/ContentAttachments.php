@@ -22,6 +22,15 @@ HTML;
 	}
 
 	/**
+	 * Instantiates the singleton
+	 */
+	public static function init()
+	{
+		if (!static::$instance)
+			static::$instance = new static();
+	}
+
+	/**
 	 * Returns attachment ids for each attachment linking to its media file.
 	 *
 	 * @param string|WP_Post|int $contentHtml
@@ -121,14 +130,13 @@ HTML;
 		return $contentHtml;
 	}
 
-
-
-	public static function init()
-	{
-		if (!static::$instance)
-			static::$instance = new static();
-	}
-
+	/**
+	 * @param $html
+	 * @param $send_id
+	 * @param $attachment
+	 *
+	 * @return string
+	 */
 	public function filterEditorMedia($html, $send_id, $attachment) {
 		// Bail if DOM extension is not loaded
 		if (!extension_loaded('dom'))
