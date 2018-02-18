@@ -3,7 +3,7 @@
  * Plugin Name: Content Attachments
  * Plugin URI:  https://wordpress.org/plugins/content-attachments/
  * Description: Wrap non-image post attachments in handy tags that allow easy styling with CSS.
- * Version:     0.2.3
+ * Version:     0.2.4
  * Author:      Themecraft Studio
  * Author URI:  https://themecraft.studio/
  * License:     GPL2
@@ -25,6 +25,9 @@
  You should have received a copy of the GNU General Public License
  along with Content Attachments. If not, see LICENSE.txt .
  */
+
+if (class_exists('ContentAttachments'))
+	die(_('Cannot load Content Attachments by Themecraft Studio as a class with the name ContentAttachments is already defined'));
 
 require_once __DIR__ .'/includes/ContentAttachments.php';
 
