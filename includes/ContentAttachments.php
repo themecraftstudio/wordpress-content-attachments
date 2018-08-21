@@ -74,8 +74,8 @@ HTML;
 		if (!extension_loaded('dom') || empty($contentHtml))
 			return $contentHtml;
 
-		$content = new DOMDocument();
-		$content->loadHTML($contentHtml, LIBXML_HTML_NODEFDTD);
+		$content = new DOMDocument('1.0', 'utf8');
+		$content->loadHTML(sprintf("<html><head><meta charset='UTF-8'></head><body>%s</body></html>", $contentHtml), LIBXML_HTML_NODEFDTD);
 
 		$query = new DOMXPath($content);
 		$anchors = $query->query('//a[contains(concat(" ", @class, " "), " content-attachment ")]');
@@ -130,7 +130,7 @@ HTML;
 			// else inline
 		}
 
-		$contentHtml = $content->saveHTML($content->firstChild->firstChild);
+		$contentHtml = $content->saveHTML($content->firstChild->lastChild);
 		$contentHtml = preg_replace('/<\/?body>/i', '', $contentHtml);
 
 		return $contentHtml;

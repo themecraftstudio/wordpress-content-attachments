@@ -28,6 +28,10 @@ Main development repository at https://github.com/themecraftstudio/wordpress-con
 As with any other plugin hosted on wordpress.org
 
 == Changelog ==
+0.3.1
+  FIXES
+    - load HTML content as UTF-8
+
 0.3.0
   NEW FEATURES
     - new filter 'content-attachments/template/paragraph'
