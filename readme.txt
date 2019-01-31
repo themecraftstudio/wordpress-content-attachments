@@ -1,7 +1,7 @@
 === Content Attachments ===
 Contributors: themecraft
 Requires at least: 4.4.0
-Tested up to: 4.9.6
+Tested up to: 5.0.3
 Stable tag: trunk
 License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -13,7 +13,7 @@ Wraps post attachments that are not images in handy tags that allow easy styling
 
 Use add_filter('content-attachments/template/paragraph', $html) to customized the HTML markup to render the attachment. Defaults to
 ```
-<a class="{{class}}" type="{{mime-type}}" href="{{url}}">
+<a class="{{classes}}" type="{{mime-type}}" href="{{url}}" {{extra_attrs}}>
 	<span class="content-attachment-text">{{text}}</span>
 	<span><i class="content-attachment-icon"></i></span>
 </a>
@@ -28,6 +28,11 @@ Main development repository at https://github.com/themecraftstudio/wordpress-con
 As with any other plugin hosted on wordpress.org
 
 == Changelog ==
+1.0.0
+	NEW
+		- {{extra_attrs}} placeholder to include all other attributes present in the anchor
+	DEPRECATED
+	 	- {{class}} in favor of {{classes}}
 0.3.1
   FIXES
     - load HTML content as UTF-8

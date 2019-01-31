@@ -3,7 +3,7 @@
  * Plugin Name: Content Attachments
  * Plugin URI:  https://wordpress.org/plugins/content-attachments/
  * Description: Wrap non-image post attachments in handy tags that allow easy styling with CSS.
- * Version:     0.3.1
+ * Version:     1.0.0
  * Author:      Themecraft Studio
  * Author URI:  https://themecraft.studio/
  * License:     GPL2
