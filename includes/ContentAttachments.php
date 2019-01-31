@@ -4,7 +4,7 @@ class ContentAttachments
 {
 	const TEMPLATE_PARAGRAPH = <<<HTML
 		<!-- START filtered content attachment -->
-		<a class="{{class}}" type="{{mime-type}}" href="{{url}}">
+		<a class="{{classes}}" type="{{mime-type}}" href="{{url}}" {{extra_attrs}}>
 			<span class="content-attachment-text">{{text}}</span>
 			<span><i class="content-attachment-icon"></i></span>
 		</a>
@@ -106,18 +106,30 @@ HTML;
 
 				/* TODO support generic DOM tree inside <a> vs text node only. */
 				$text = '';
-				foreach ($anchor->childNodes as $child_node)
-					/** @var $child_node DOMNode */
-					if ($child_node->nodeType == XML_TEXT_NODE)
-						$text = $child_node->nodeValue;
+				foreach ($anchor->childNodes as $child_node) {
+                    /** @var $child_node DOMNode */
+                    if ($child_node->nodeType == XML_TEXT_NODE) {
+                        $text = $child_node->nodeValue;
+                    }
+                }
+
+                $extraAttributes = '';
+                foreach ($anchor->attributes as /** @var DOMAttr $attribute */$attribute) {
+                    if (!in_array($attribute->name, ['href', 'type', 'class']))
+                        $extraAttributes .= sprintf(' %s="%s"', $attribute->name, $attribute->value);
+                }
 
 				// Parse HTML template
 				$templateHtml = apply_filters('content-attachments_template', static::TEMPLATE_PARAGRAPH);
 				$templateHtml = apply_filters('content-attachments/template/paragraph', $templateHtml);
-				$templateHtml = str_replace('{{class}}', $anchor->getAttribute('class'), $templateHtml);
+				$templateHtml = str_replace('{{classes}}', $anchor->getAttribute('class'), $templateHtml);
 				$templateHtml = str_replace('{{mime-type}}', $mimeType, $templateHtml);
 				$templateHtml = str_replace('{{url}}', $url, $templateHtml);
 				$templateHtml = str_replace('{{text}}', $text, $templateHtml);
+                $templateHtml = str_replace('{{extra_attrs}}', $extraAttributes, $templateHtml);
+
+                // Deprecated
+                $templateHtml = str_replace('{{class}}', $anchor->getAttribute('class'), $templateHtml);
 
 				$template = $content->createDocumentFragment();
 				$template->appendXML($templateHtml);
