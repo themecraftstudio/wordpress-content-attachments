@@ -28,7 +28,7 @@ Please report issues or ask questions on (GitHub)[https://github.com/themecrafts
 
 == Frequently Asked Questions ==
 
-= Where should I report issues / get help? =
+= Where should I report issues or get help? =
 
 **GitHub** Please report problems directly on the plugin's [main development repository](https://github.com/themecraftstudio/wordpress-content-attachments)
 
