@@ -42,7 +42,7 @@ HTML;
 			$contentHtml = $contentHtml->post_content;
 
 		$content = new DOMDocument();
-		$content->loadHTML($contentHtml, LIBXML_HTML_NODEFDTD);
+		$content->loadHTML($contentHtml, LIBXML_HTML_NODEFDTD | LIBXML_NOWARNING | LIBXML_NOERROR);
 
 		$query = new DOMXPath($content);
 		$anchors = $query->query('//a[contains(concat(" ", @class, " "), " content-attachment ")]');
@@ -75,7 +75,7 @@ HTML;
 			return $contentHtml;
 
 		$content = new DOMDocument('1.0', 'utf8');
-		$content->loadHTML(sprintf("<html><head><meta charset='UTF-8'></head><body>%s</body></html>", $contentHtml), LIBXML_HTML_NODEFDTD);
+		$content->loadHTML(sprintf("<html><head><meta charset='UTF-8'></head><body>%s</body></html>", $contentHtml), LIBXML_HTML_NODEFDTD | LIBXML_NOWARNING | LIBXML_NOERROR);
 
 		$query = new DOMXPath($content);
 		$anchors = $query->query('//a[contains(concat(" ", @class, " "), " content-attachment ")]');
@@ -170,7 +170,7 @@ HTML;
 		$mimeType = get_post_mime_type($id);
 
 		$doc = new DOMDocument();
-		$doc->loadHTML($html, LIBXML_HTML_NODEFDTD);
+		$doc->loadHTML($html, LIBXML_HTML_NODEFDTD | LIBXML_NOWARNING | LIBXML_NOERROR);
 
 		$query = new DOMXPath($doc);
 		$anchors = $query->query('//a[@href]');

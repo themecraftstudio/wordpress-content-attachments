@@ -1,7 +1,7 @@
 === Content Attachments ===
 Contributors: themecraft
 Requires at least: 4.4.0
-Tested up to: 5.1.1
+Tested up to: 5.3.0
 Requires PHP: 7.0.0
 Stable tag: trunk
 License: GPL2 or later
@@ -34,6 +34,11 @@ Please report issues or ask questions on (GitHub)[https://github.com/themecrafts
 
 
 == Changelog ==
+= 1.1.0 =
+*Release Date - 27 October 2019*
+
+* Fix - Disabled libxml warnings to hide warnings when the markup contains custom elements
+
 = 1.0.0 =
 *Release Date - 31 January 2019*
 
